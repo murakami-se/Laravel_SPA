@@ -30,6 +30,10 @@ LaravelによるSPA開発環境構築
 
 1. `composer install`
 
+1. `.env.example` をコピーして `.evn` を作成
+
+1. `.env` を環境に合わせて修正
+
 1. `php artisan key:generate`
 
 1. `php artisan migrate`
@@ -43,3 +47,11 @@ LaravelによるSPA開発環境構築
 1. `php artisan serve` で内部サーバー起動
 1. `npm run watch` でファイル監視
 1. http://localhost:3000 にアクセス
+
+## テストユーザー作成方法
+
+1. `php artisan db:seed --class=UsersTableSeeder`
+
+- username: test
+- email: test@example
+- password: password

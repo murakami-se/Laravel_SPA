@@ -13,6 +13,8 @@ const NavBar = () => {
                 <ul className="navbar-nav">
                     <li className="nav-item"><Link to="/" className={getNavLinkClass("/")}>Home</Link></li>
                     <li className="nav-item"><Link to="/about" className={getNavLinkClass("/about")}>About</Link></li>
+                    <li className="nav-item"><Link to="/login" className={getNavLinkClass("/login")}>Login</Link></li>
+                    <li className="nav-item"><Link to="/profile" className={getNavLinkClass("/profile")}>Profile</Link></li>
                 </ul>
             </div>
         </nav>

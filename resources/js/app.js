@@ -7,12 +7,16 @@ import { BrowserRouter, Route, Switch } from "react-router-dom"
 import NavBar from "./components/NavBar"
 import Home from "./pages/Home"
 import About from "./pages/About"
+import Login from "./pages/Login"
+import Profile from "./pages/Profile"
 
 const App = () => (
     <>
         <BrowserRouter>
             <NavBar />
             <Switch>
+                <Route path="/profile" component={Profile} />
+                <Route path="/login" component={Login} />
                 <Route path="/about" component={About} />
                 <Route exact path="/" component={Home} />
             </Switch>

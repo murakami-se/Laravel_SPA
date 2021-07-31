@@ -2,16 +2,18 @@ require('./bootstrap')
 
 import React from "react"
 import ReactDOM from "react-dom"
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom"
 
-import Home from "./components/pages/Home"
-import Example from "./components/pages/Example"
+import NavBar from "./components/NavBar"
+import Home from "./pages/Home"
+import About from "./pages/About"
 
 const App = () => (
     <>
         <BrowserRouter>
+            <NavBar />
             <Switch>
-                <Route path="/example" component={Example} />
+                <Route path="/about" component={About} />
                 <Route exact path="/" component={Home} />
             </Switch>
         </BrowserRouter>
@@ -19,5 +21,5 @@ const App = () => (
 )
 
 if (document.getElementById("app")) {
-    ReactDOM.render(<App />, document.getElementById("app"));
+    ReactDOM.render(<App />, document.getElementById("app"))
 }

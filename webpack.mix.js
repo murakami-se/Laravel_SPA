@@ -18,4 +18,6 @@ mix.browserSync({                // 変更を監視して自動でブラウザ�
     .js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         //
-    ]);
+    ])
+    .version()
+    .disableNotifications();     // ビルド時のOS通知無効

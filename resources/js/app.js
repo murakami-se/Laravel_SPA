@@ -2,12 +2,19 @@ require('./bootstrap')
 
 import React from "react"
 import ReactDOM from "react-dom"
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import Example from "./components/Example"
+import Home from "./components/pages/Home"
+import Example from "./components/pages/Example"
 
 const App = () => (
     <>
-        <Example />
+        <BrowserRouter>
+            <Switch>
+                <Route path="/example" component={Example} />
+                <Route exact path="/" component={Home} />
+            </Switch>
+        </BrowserRouter>
     </>
 )
 

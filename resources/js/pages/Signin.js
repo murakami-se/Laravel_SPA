@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 
-const Login = () => {
+const Signin = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     return (
         <div className="container">
-            <h2>Login</h2>
+            <h2>Signin</h2>
             <div className="card">
                 <form className="card-body">
                     <div className="mb-3">
@@ -24,4 +24,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Signin

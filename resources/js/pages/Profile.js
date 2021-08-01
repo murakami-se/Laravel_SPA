@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { useAuthState } from '../providers/authProvider'
 
 const Profile = () => {
-    const user = {name: '', email: ''}
+    const { user } = useAuthState()
 
     return (
         <div className="container">
@@ -14,7 +15,6 @@ const Profile = () => {
                         <dt className="col-2">メールアドレス</dt>
                         <dd className="col-10">{user.email}</dd>
                     </dl>
-                    <button type="button" className="btn btn-dark">Logout</button>
                 </div>
             </div>
         </div>

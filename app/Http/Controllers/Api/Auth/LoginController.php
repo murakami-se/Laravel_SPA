@@ -27,6 +27,7 @@ class LoginController extends Controller
         $status = 401;
         $message = 'ユーザが見つかりません';
         $user = null;
+        $token = null;
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             // Success
@@ -38,7 +39,7 @@ class LoginController extends Controller
             $user->tokens()->where('name', 'token-name')->delete();
             $token = $user->createToken('token-name')->plainTextToken;
         }
-        return response()->json(['result' => $result, 'status' => $status, 'user' => $user, 'message' => $message]);
+        return response()->json(['result' => $result, 'status' => $status, 'user' => $user, 'token' => $token, 'message' => $message]);
     }
 
 

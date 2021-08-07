@@ -4,30 +4,27 @@ const AuthService = {
 
     /**
      * ログインリクエスト送信（同期）
-     * @param {string} email 
-     * @param {string} password 
-     * @returns {Promise}           then: userオブジェクト, catch: 表示用のuserMessagesプロパティを持つErrorインスタンス
+     * @param {object} formData     email, password 
+     * @returns {Promise}           then: userオブジェクト, catch: Errorインスタンス
      */
-    async login(email, password) {
+    async login(formData) {
         // CSRFトークンを初期化
         await axios.get("/sanctum/csrf-cookie")
 
-        return axios.post('/api/login', {email, password})
+        return axios.post('/api/login', formData)
             .then(res => res.data.user)
-            .catch(error => {
-                let messages = []
-                switch (error.response.status) {
+            .catch(err => {
+                switch (err.response.status) {
                     case UNAUTHORIZED:         // 認証エラー
-                        messages.push(error.response.data.message)
-                        break;
+                        err.message = err.response.data.message
+                        break
                     case UNPROCESSABLE_ENTITY: // バリデーションエラー
-                        _.forEach(error.response.data.errors, itemMessages => messages = messages.concat(itemMessages))
-                        break;
+                        err.message = 'ログインに失敗しました。'
+                        break
                     default:
-                        messages.push('予期しないエラーが発生し、ログインに失敗しました。')
+                        err.message = '予期しないエラーが発生し、ログインに失敗しました。'
                 }
-                error.userMessages = messages
-                throw error
+                throw err
             })
     },
 

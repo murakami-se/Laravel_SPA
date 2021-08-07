@@ -66,5 +66,5 @@ viewファイル等のファイルも監視
 1. `php artisan db:seed --class=UsersTableSeeder`
 
 - username: test
-- email: test@example
+- email: test@example.com
 - password: password

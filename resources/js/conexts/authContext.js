@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     const handleLogin = (email, password) => {
         AuthService.login(email, password)
             .then(user => setUser(user))
-            .catch(error => setContextError(error.userMessages, error))
+            .catch(error => setContextError(error.message, error))
     }
 
     const handleLogout = () => {

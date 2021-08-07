@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState}  from "react"
 
 const ErrorContext = createContext({
     hasError: false,
-    userMessages: null,
+    userMessage: null,
     error: null,
     setContextError: () => {},
     setContextErrorDone: () => {},
@@ -10,24 +10,24 @@ const ErrorContext = createContext({
 
 export const ErrorProvider = props => {
     const [hasError, setHasError] = useState(false)
-    const [userMessages, setuserMessages] = useState(null)
+    const [userMessage, setuserMessage] = useState(null)
     const [error, setError] = useState(null)
 
-    const setContextError = (userMessages, error) => {
-        setuserMessages(userMessages)
+    const setContextError = (userMessage, error) => {
+        setuserMessage(userMessage)
         setError(error)
         setHasError(true)
     }
 
     const setContextErrorDone = () => {
-        setuserMessages(null)
+        setuserMessage(null)
         setError(null)
         setHasError(false)
     }
 
     return (
         <ErrorContext.Provider
-            value={{hasError, userMessages, error, setContextError, setContextErrorDone}}
+            value={{hasError, userMessage, error, setContextError, setContextErrorDone}}
             {...props}
         />
     )

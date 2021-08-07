@@ -14,7 +14,7 @@ LaravelによるSPA開発環境構築
 
 ## branchs
 
-- **main: Laravel_SPA基本ブランチ（laravel/ui,ホットリロード機能導入、route設定）★現在**
+- main: Laravel_SPA基本ブランチ（laravel/ui,ホットリロード機能導入、route設定）
     - react-main: React基本ブランチ
         - react-router: ルーティングありReactブランチ
             - **react-auth: Sanctumによるログイン、ログアウト機能ありReactブランチ　★現在**

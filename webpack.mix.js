@@ -11,9 +11,17 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.browserSync({                // 変更を監視して自動でブラウザ更新
-        proxy: '127.0.0.1:8000', // ローカルサーバーアドレス
-        open: false              // ブラウザを自動で開かない
+mix
+    // .browserSync({                // 変更を監視して自動でブラウザ更新
+    //     proxy: '127.0.0.1:8000', // ローカルサーバーアドレス
+    //     open: false              // ブラウザを自動で開かない
+    // })
+    .webpackConfig({
+        devServer: {
+            proxy: {
+                '*': 'http://localhost:8000'
+            }
+        }
     })
     .js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [

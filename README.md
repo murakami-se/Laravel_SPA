@@ -14,7 +14,7 @@ LaravelによるSPA開発環境構築
 
 ## branchs
 
-- **main: Laravel_SPA基本ブランチ（laravel/ui,browserSync導入、route設定）★現在**
+- **main: Laravel_SPA基本ブランチ（laravel/ui,ホットリロード機能導入、route設定）★現在**
     - react-main: React基本ブランチ
         - react-router: ルーティングありReactブランチ
             - react-auth: Sanctumによるログイン、ログアウト機能ありReactブランチ
@@ -44,8 +44,19 @@ LaravelによるSPA開発環境構築
 
 1. `npm run dev`
 
+## ホットリロード使用方法
+
+jsとcssの変更を監視してブラウザに反映
+
+1. `php artisan serve` で内部サーバー起動
+1. `npm run hot` でファイル監視
+1. http://localhost:8080 にアクセス
+
 ## browserSync使用方法
 
+viewファイル等のファイルも監視
+
+1. `webpack.mix.js` の `browserSync` 設定のコメントアウトを外す
 1. `php artisan serve` で内部サーバー起動
 1. `npm run watch` でファイル監視
 1. http://localhost:3000 にアクセス

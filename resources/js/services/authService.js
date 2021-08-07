@@ -1,17 +1,6 @@
 import { UNAUTHORIZED, UNPROCESSABLE_ENTITY } from '../constants/statusCode'
-import validateEmail from '../utils/validateEmail'
 
 const AuthService = {
-
-    _validateStringField(value, field) {
-        if (typeof value !== 'string' || !value.trim().length)
-            throw Error(`${field} を入力してください`)
-    },
-
-    _validateEmail(email, field = 'email') {
-        if (!validateEmail(email))
-            throw Error(`${field} を正しく入力してください`)
-    },
 
     /**
      * ログインリクエスト送信（同期）
@@ -20,10 +9,7 @@ const AuthService = {
      * @returns {Promise}           then: userオブジェクト, catch: 表示用のuserMessagesプロパティを持つErrorインスタンス
      */
     async login(email, password) {
-        this._validateEmail(email)
-        this._validateStringField('password', password)
-        
-        // ログイン時にCSRFトークンを初期化
+        // CSRFトークンを初期化
         await axios.get("/sanctum/csrf-cookie")
 
         return axios.post('/api/login', {email, password})

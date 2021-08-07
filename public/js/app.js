@@ -2783,7 +2783,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _constants_statusCode__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants/statusCode */ "./resources/js/constants/statusCode.js");
-/* harmony import */ var _utils_validateEmail__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/validateEmail */ "./resources/js/utils/validateEmail.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2791,16 +2790,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
-
 var AuthService = {
-  _validateStringField: function _validateStringField(value, field) {
-    if (typeof value !== 'string' || !value.trim().length) throw Error("".concat(field, " \u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044"));
-  },
-  _validateEmail: function _validateEmail(email) {
-    var field = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'email';
-    if (!(0,_utils_validateEmail__WEBPACK_IMPORTED_MODULE_2__.default)(email)) throw Error("".concat(field, " \u3092\u6B63\u3057\u304F\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044"));
-  },
-
   /**
    * ログインリクエスト送信（同期）
    * @param {string} email 
@@ -2808,22 +2798,15 @@ var AuthService = {
    * @returns {Promise}           then: userオブジェクト, catch: 表示用のuserMessagesプロパティを持つErrorインスタンス
    */
   login: function login(email, password) {
-    var _this = this;
-
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _this._validateEmail(email);
-
-              _this._validateStringField('password', password); // ログイン時にCSRFトークンを初期化
-
-
-              _context.next = 4;
+              _context.next = 2;
               return axios.get("/sanctum/csrf-cookie");
 
-            case 4:
+            case 2:
               return _context.abrupt("return", axios.post('/api/login', {
                 email: email,
                 password: password
@@ -2854,7 +2837,7 @@ var AuthService = {
                 throw error;
               }));
 
-            case 5:
+            case 3:
             case "end":
               return _context.stop();
           }
@@ -2882,26 +2865,6 @@ var AuthService = {
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AuthService);
-
-/***/ }),
-
-/***/ "./resources/js/utils/validateEmail.js":
-/*!*********************************************!*\
-  !*** ./resources/js/utils/validateEmail.js ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-var validateEmail = function validateEmail(email) {
-  var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return regex.test(String(email).toLowerCase());
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (validateEmail);
 
 /***/ }),
 

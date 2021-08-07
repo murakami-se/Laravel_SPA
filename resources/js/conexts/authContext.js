@@ -27,8 +27,8 @@ export const AuthProvider = ({ children }) => {
         checkAuth()
     }, [])
 
-    const handleLogin = (email, password) => {
-        AuthService.login(email, password)
+    const handleLogin = (formData) => {
+        AuthService.login(formData)
             .then(user => setUser(user))
             .catch(error => setContextError(error.message, error))
     }

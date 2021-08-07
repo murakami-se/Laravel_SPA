@@ -18,6 +18,8 @@ LaravelによるSPA開発環境構築
     - **react-main: React基本ブランチ★現在**
         - react-router: ルーティングありReactブランチ
             - react-auth: Sanctumによるログイン、ログアウト機能ありReactブランチ
+                - react-auht-register: 新規ユーザー登録機能ありReactブランチ
+                    - react-auth-socialite: Socialiteによるソーシャルログイン機能ありReactブランチ
     - vue-main: Vue基本ブランチ（未）
 
 ## 使用方法
@@ -29,6 +31,10 @@ LaravelによるSPA開発環境構築
 1. `composer self-update`
 
 1. `composer install`
+
+1. `.env.example` をコピーして `.evn` を作成
+
+1. `.env` を環境に合わせて修正
 
 1. `php artisan key:generate`
 

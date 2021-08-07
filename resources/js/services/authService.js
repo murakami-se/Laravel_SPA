@@ -3,7 +3,7 @@ import { UNAUTHORIZED, UNPROCESSABLE_ENTITY } from '../constants/statusCode'
 const AuthService = {
 
     /**
-     * ログインリクエスト送信（同期）
+     * ログインリクエスト送信（非同期）
      * @param {object} formData     email, password 
      * @returns {Promise}           then: userオブジェクト, catch: Errorインスタンス
      */

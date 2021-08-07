@@ -18,6 +18,8 @@ LaravelによるSPA開発環境構築
     - react-main: React基本ブランチ
         - **react-router: ルーティングありReactブランチ　★現在**
             - react-auth: Sanctumによるログイン、ログアウト機能ありReactブランチ
+                - react-auht-register: 新規ユーザー登録機能ありReactブランチ
+                    - react-auth-socialite: Socialiteによるソーシャルログイン機能ありReactブランチ
     - vue-main: Vue基本ブランチ（未）
 
 ## 使用方法

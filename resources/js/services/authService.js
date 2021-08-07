@@ -19,7 +19,7 @@ const AuthService = {
                         err.message = err.response.data.message
                         break
                     case UNPROCESSABLE_ENTITY: // バリデーションエラー
-                        err.message = 'ログインに失敗しました。'
+                        err.message = 'ログインできませんでした。'
                         break
                     default:
                         err.message = '予期しないエラーが発生し、ログインに失敗しました。'

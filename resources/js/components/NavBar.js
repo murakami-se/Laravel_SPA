@@ -31,7 +31,10 @@ const NavBar = () => {
                 {isLoggedIn ? (
                     <a className="btn btn-sm btn-light" onClick={onLogout}>Logout</a>
                 ) : (
-                    <Link to="/login" className="btn btn-sm btn-primary">Login</Link>
+                    <>
+                        <Link to="/register" className="btn btn-sm btn-outline-light mr-2">Register</Link>
+                        <Link to="/login" className="btn btn-sm btn-primary">Login</Link>
+                    </>
                 )}
             </div>
         </nav>

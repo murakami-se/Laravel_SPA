@@ -11,6 +11,7 @@ import Loading from "./components/Loading"
 import Home from "./pages/Home"
 import About from "./pages/About"
 import Login from "./pages/Login"
+import Register from "./pages/Register"
 import Profile from "./pages/Profile"
 
 const UnAuthRoute = ({children, redirectTo, ...rest}) => {
@@ -60,6 +61,9 @@ const App = () => {
             <Route path="/about" component={About} />
             <UnAuthRoute path="/login" redirectTo="/profile">
                 <Login />
+            </UnAuthRoute>
+            <UnAuthRoute path="/register" redirectTo="/profile">
+                <Register />
             </UnAuthRoute>
             <AuthRoute path="/profile" redirectTo="/login">
                 <Profile />

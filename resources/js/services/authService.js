@@ -3,7 +3,7 @@ import { UNAUTHORIZED, UNPROCESSABLE_ENTITY } from '../constants/statusCode'
 const AuthService = {
 
     /**
-     * ログインリクエスト送信（同期）
+     * ログインリクエスト送信（非同期）
      * @param {object} formData     email, password 
      * @returns {Promise}           then: userオブジェクト, catch: Errorインスタンス
      */
@@ -19,7 +19,7 @@ const AuthService = {
                         err.message = err.response.data.message
                         break
                     case UNPROCESSABLE_ENTITY: // バリデーションエラー
-                        err.message = 'ログインに失敗しました。'
+                        err.message = 'ログインできませんでした。'
                         break
                     default:
                         err.message = '予期しないエラーが発生し、ログインに失敗しました。'
@@ -42,7 +42,34 @@ const AuthService = {
      */
     getUserInfo() {
         return axios.get('/api/user').then(res => res.data)
-    }
+    },
+
+    /**
+     * ユーザー登録リクエスト送信（非同期）
+     * @param {object} formData     email, password 
+     * @returns {Promise}           then: userオブジェクト, catch: Errorインスタンス
+     */
+    async register(formData) {
+        // CSRFトークンを初期化
+        await axios.get("/sanctum/csrf-cookie")
+
+        return axios.post('/api/register', formData)
+            .then(res => res.data)
+            .catch(err => {
+                console.log(err.response)
+                switch (err.response.status) {
+                    case UNAUTHORIZED:         // 認証エラー
+                        err.message = err.response.data.message
+                        break
+                    case UNPROCESSABLE_ENTITY: // バリデーションエラー
+                        err.message = 'ユーザー登録できませんでした。'
+                        break
+                    default:
+                        err.message = '予期しないエラーが発生し、ユーザー登録に失敗しました。'
+                }
+                throw err
+            })
+    },
 }
 
 export default AuthService

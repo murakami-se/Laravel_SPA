@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', [App\Http\Controllers\Api\Auth\LoginController::class, 'login']);
 Route::post('logout', [App\Http\Controllers\Api\Auth\LoginController::class, 'logout']);
+Route::post('register', [App\Http\Controllers\Api\Auth\RegisterController::class, 'register']);
 
 // ログイン中のみ
 Route::group(['middleware' => ['auth:sanctum']], function() {

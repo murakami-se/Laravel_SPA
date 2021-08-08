@@ -7,7 +7,8 @@ const AuthContext = createContext({
     isLoggedIn: false,
     user: null,
     handleLogin: () => {},
-    handleLogout: () => {}
+    handleLogout: () => {},
+    handleRegister: () => {}
 })
 
 export const AuthProvider = ({ children }) => {
@@ -27,8 +28,8 @@ export const AuthProvider = ({ children }) => {
         checkAuth()
     }, [])
 
-    const handleLogin = (email, password) => {
-        AuthService.login(email, password)
+    const handleLogin = (formData) => {
+        AuthService.login(formData)
             .then(user => setUser(user))
             .catch(error => setContextError(error.message, error))
     }
@@ -37,8 +38,14 @@ export const AuthProvider = ({ children }) => {
         AuthService.logout().finally(() => setUser(null))
     }
 
+    const handleRegister = (formData) => {
+        AuthService.register(formData)
+            .then(user => setUser(user))
+            .catch(error => setContextError(error.message, error))  
+    }
+
     return (
-        <AuthContext.Provider value={{ isLoading, isLoggedIn: !!user, user, handleLogin, handleLogout }}>
+        <AuthContext.Provider value={{ isLoading, isLoggedIn: !!user, user, handleLogin, handleLogout, handleRegister }}>
             {children}
         </AuthContext.Provider>
     )

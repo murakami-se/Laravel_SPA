@@ -8,7 +8,9 @@ const AuthContext = createContext({
     user: null,
     handleLogin: () => {},
     handleLogout: () => {},
-    handleRegister: () => {}
+    handleRegister: () => {},
+    handleGetSocialLoginUrl: () => {},
+    handleSocialLogin: () => {},
 })
 
 export const AuthProvider = ({ children }) => {
@@ -29,9 +31,33 @@ export const AuthProvider = ({ children }) => {
     }, [])
 
     const handleLogin = (formData) => {
+        setLoading(true)
         AuthService.login(formData)
             .then(user => setUser(user))
             .catch(error => setContextError(error.message, error))
+            .finally(() => setLoading(false))
+    }
+
+    const handleGetSocialLoginUrl = (provider) => {
+        setLoading(true)
+        AuthService.getSocialLoginUrl(provider)
+            .then(redirectUrl => window.location.href = redirectUrl)
+            .catch(error => setContextError(error.message, error))
+    }
+
+    const handleSocialLogin = (provider, queryResponse) => {
+        setLoading(true)
+
+        // リダイレクトURLのパラメーターをチェック
+        if (Object.prototype.hasOwnProperty.call(queryResponse, 'error')) {
+            setContextError('ソーシャルサービスの認可処理でエラーが発生しました。', queryResponse)
+            setLoading(false)
+        } else {
+            AuthService.socialLogin(provider, queryResponse)
+                .then(user => setUser(user))
+                .catch(error => setContextError(error.message, error))
+                .finally(() => setLoading(false))
+        }
     }
 
     const handleLogout = () => {
@@ -39,13 +65,15 @@ export const AuthProvider = ({ children }) => {
     }
 
     const handleRegister = (formData) => {
+        setLoading(true)
         AuthService.register(formData)
             .then(user => setUser(user))
-            .catch(error => setContextError(error.message, error))  
+            .catch(error => setContextError(error.message, error))
+            .finally(() => setLoading(false))
     }
 
     return (
-        <AuthContext.Provider value={{ isLoading, isLoggedIn: !!user, user, handleLogin, handleLogout, handleRegister }}>
+        <AuthContext.Provider value={{ isLoading, isLoggedIn: !!user, user, handleLogin, handleLogout, handleRegister, handleGetSocialLoginUrl, handleSocialLogin }}>
             {children}
         </AuthContext.Provider>
     )

@@ -29,6 +29,29 @@ const AuthService = {
     },
 
     /**
+     * ソーシャルログインURL取得リクエスト送信（非同期）
+     * @param {strint} provider 
+     * @returns {Promise}           then: {string} redirect url, catch: Errorインスタンス
+     */
+    getSocialLoginUrl(provider) {
+        return axios.get(`/api/login/${provider}`)
+            .then(res => res.data.redirect_url)
+            .catch(err => {
+                err.message = '予期しないエラーが発生し、ソーシャルログインを実行できませんでした。'
+                throw err
+            })
+    },
+
+    socialLogin(provider, { code, state }) {
+        return axios.post(`/api/login/${provider}/callback`, { code, state })
+            .then(res => res.data)
+            .catch(err => {
+                err.message = '予期しないエラーが発生し、ソーシャルログインできませんでした。'
+                throw err
+            })
+    },
+
+    /**
      * ログアウトリクエスト送信（非同期）
      * @returns {Promise}
      */

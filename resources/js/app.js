@@ -13,6 +13,7 @@ import About from "./pages/About"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Profile from "./pages/Profile"
+import SocialLoginProgress from "./pages/SocialLoginProgress"
 
 const UnAuthRoute = ({children, redirectTo, ...rest}) => {
     const { isLoggedIn } = useAuth()
@@ -59,6 +60,9 @@ const App = () => {
         <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/about" component={About} />
+            <UnAuthRoute path="/login/:provider/callback" redirectTo="/profile">
+                <SocialLoginProgress />
+            </UnAuthRoute>
             <UnAuthRoute path="/login" redirectTo="/profile">
                 <Login />
             </UnAuthRoute>

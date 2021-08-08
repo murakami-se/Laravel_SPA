@@ -6,9 +6,12 @@ import { EmailRegex } from '../utils/validation'
 import ErrorAlert from '../components/ErrorAlert'
 import NavBar from '../components/NavBar'
 
+import 'font-awesome/css/font-awesome.css'
+import 'bootstrap-social/bootstrap-social.css'
+
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
-    const { handleLogin } = useAuth()
+    const { handleLogin, handleGetSocialLoginUrl } = useAuth()
 
     return (
         <>
@@ -48,6 +51,11 @@ const Login = () => {
                         </div>
                         <button className="btn btn-primary">Submit</button>
                     </form>
+                </div>
+                <div className="card-footer">
+                    <button type="botton" className="btn btn-social btn-github" onClick={() => handleGetSocialLoginUrl('github')}>
+                        <span className="fa fa-github"></span> Sign in with Github
+                    </button>
                 </div>
             </div>
         </>
